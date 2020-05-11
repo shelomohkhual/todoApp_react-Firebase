@@ -63,7 +63,7 @@ exports.postOneTodo = (request, response) => {
 
 // DELETE – delete todo
 exports.deleteTodo = (request, reponse) => {
-  const document = db.doc("/todos/${request.params.todoId}");
+  const document = db.doc(`/todos/${request.params.todoId}`);
 
   document
     .get()
@@ -79,7 +79,7 @@ exports.deleteTodo = (request, reponse) => {
     })
     .then(() => {
       reponse.json({
-        message: "Delete successfull",
+        message: "Delete successful",
       });
     })
     .catch((error) => {

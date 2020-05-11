@@ -60,3 +60,32 @@ exports.postOneTodo = (request, response) => {
       console.error(error);
     });
 };
+
+// DELETE – delete todo
+exports.deleteTodo = (request, reponse) => {
+  const document = db.doc("/todos/${request.params.todoId}");
+
+  document
+    .get()
+    .then((doc) => {
+      // check "todo" exist in DB, to prevent error
+      if (!doc.exists) {
+        return response.status(404).json({
+          error: "Todo not found",
+        });
+      }
+
+      return document.delete();
+    })
+    .then(() => {
+      reponse.json({
+        message: "Delete successfull",
+      });
+    })
+    .catch((error) => {
+      response.status(500).json({
+        error: error.code,
+      });
+      console.log(error);
+    });
+};

@@ -5,8 +5,7 @@ exports.getAllTodos = (request, response) => {
     .orderBy("createdAt", "desc")
     .get()
     .then((data) => {
-      let todosList = [];
-
+      let todos = [];
       data.forEach((doc) => {
         todos.push({
           todoId: doc.id,
@@ -15,11 +14,10 @@ exports.getAllTodos = (request, response) => {
           createdAt: doc.data().createdAt,
         });
       });
-
-      return response.json(todosList);
+      return response.json(todos);
     })
-    .catch((error) => {
-      console.error(error);
-      return response.status(500).json({ error: error.code });
+    .catch((err) => {
+      console.error(err);
+      return response.status(500).json({ error: err.code });
     });
 };

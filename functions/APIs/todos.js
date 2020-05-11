@@ -1,6 +1,6 @@
 const { db } = require("../util/admin");
 
-// INDEX – fetch all todos
+// GET – fetch all todos
 exports.getAllTodos = (request, response) => {
   db.collection("todos")
     .orderBy("createdAt", "desc")
@@ -23,7 +23,7 @@ exports.getAllTodos = (request, response) => {
     });
 };
 
-// CREATE – create todo
+// POST – create todo
 exports.postOneTodo = (request, response) => {
   // Validation for Empty Title And Body
   if (request.body.title.trim() === "") {
@@ -83,9 +83,35 @@ exports.deleteTodo = (request, reponse) => {
       });
     })
     .catch((error) => {
+      console.log(error);
       response.status(500).json({
         error: error.code,
       });
+    });
+};
+
+// PUT – Edit todo
+exports.editTodo = (request, response) => {
+  // validation : restrict editing "ID" and "CreatedAt"
+  if (request.body.todoId || request.body.createdAt) {
+    return response.status(403).json({
+      message: "Not allowed to edit",
+    });
+  }
+
+  let document = db.collection("todos").doc(request.params.todoId);
+
+  document
+    .update(request.body)
+    .then(() => {
+      response.json({
+        message: "Update successfully",
+      });
+    })
+    .catch((error) => {
       console.log(error);
+      return response.status(500).json({
+        error: error.code,
+      });
     });
 };

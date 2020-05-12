@@ -83,7 +83,7 @@ exports.deleteTodo = (request, reponse) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       response.status(500).json({
         error: error.code,
       });
@@ -109,7 +109,7 @@ exports.editTodo = (request, response) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       return response.status(500).json({
         error: error.code,
       });

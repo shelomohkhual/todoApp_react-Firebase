@@ -13,7 +13,9 @@ app.post("/todo", postOneTodo);
 app.delete("/todo/:todoId", deleteTodo);
 app.put("/todo/:todoId", editTodo);
 
-const { loginUser } = require("./APIs/users");
+const { logInUser, signUpUser } = require("./APIs/users");
 
-app.post("/login", loginUser);
+app.post("/login", logInUser);
+app.post("/signup", signUpUser);
+
 exports.api = functions.https.onRequest(app);

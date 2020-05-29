@@ -3,6 +3,7 @@ const { db } = require("../util/admin");
 // GET – fetch all todos
 exports.getAllTodos = (request, response) => {
   db.collection("todos")
+    .where("username", "==", request.user.username)
     .orderBy("createdAt", "desc")
     .get()
     .then((data) => {
@@ -39,6 +40,7 @@ exports.postOneTodo = (request, response) => {
   }
 
   const newTodo = {
+    username: request.user.username,
     title: request.body.title,
     body: request.body.body,
     createdAt: new Date().toISOString(),
@@ -68,6 +70,9 @@ exports.deleteTodo = (request, reponse) => {
   document
     .get()
     .then((doc) => {
+      if (doc.data().username !== request.user.username) {
+        return response.status(403).json({ error: "UnAhorized" });
+      }
       // check "todo" exist in DB, to prevent error
       if (!doc.exists) {
         return response.status(404).json({

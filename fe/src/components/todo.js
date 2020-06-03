@@ -343,8 +343,8 @@ class todo extends Component {
           </Dialog>
 
           <Grid container spacing={2}>
-            {this.state.todos.map((todo) => (
-              <Grid item xs={12} sm={6}>
+            {this.state.todos.map((todo, index) => (
+              <Grid item xs={12} sm={6} key={index}>
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
                     <Typography variant="h5" component="h2">

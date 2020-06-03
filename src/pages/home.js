@@ -94,10 +94,19 @@ class home extends Component {
   componentWillMount = () => {
     authMiddleWare(this.props.history);
     const authToken = localStorage.getItem("AuthToken");
+
+    if (authToken === "AuthToken undefined") {
+      this.props.history.push("/");
+    }
+
     axios.defaults.headers.common = { Authorization: `${authToken}` };
     axios
       .get("/user")
       .then((response) => {
+        console.log("user respone: " + response);
+        console.log("user respone: " + response);
+        console.log("user respone: " + response);
+        console.log("user respone: " + response);
         console.log(response.data);
         this.setState({
           firstName: response.data.userCredentials.firstName,
@@ -114,7 +123,8 @@ class home extends Component {
           this.props.history.push("/login");
         }
         this.setState({ errorMsg: "Error in retrieving the data" });
-      });
+      })
+      .then(function () {});
   };
 
   render() {

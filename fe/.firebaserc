@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "todoapp-js-frontend",
+    "live": "todoapp-js-frontend"
+  }
+}

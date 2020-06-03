@@ -109,10 +109,10 @@ class home extends Component {
         });
       })
       .catch((error) => {
+        console.log(error);
         if (error.response.status === 403) {
           this.props.history.push("/login");
         }
-        console.log(error);
         this.setState({ errorMsg: "Error in retrieving the data" });
       });
   };

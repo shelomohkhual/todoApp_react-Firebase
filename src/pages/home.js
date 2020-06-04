@@ -95,10 +95,6 @@ class home extends Component {
     authMiddleWare(this.props.history);
     const authToken = localStorage.getItem("AuthToken");
 
-    if (authToken === "AuthToken undefined") {
-      this.props.history.push("/");
-    }
-
     axios.defaults.headers.common = { Authorization: `${authToken}` };
     axios
       .get("/user")

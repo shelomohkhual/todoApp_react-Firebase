@@ -9,6 +9,9 @@ const { validateLoginData, validateSignUpData } = require("../util/validators");
 
 // POST - User Login
 exports.logInUser = (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "GET, POST");
+
   const user = {
     email: request.body.email,
     password: request.body.password,
@@ -36,6 +39,9 @@ exports.logInUser = (request, response) => {
 
 // POST - User SignUp
 exports.signUpUser = (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "GET, POST");
+
   const newUser = {
     firstName: request.body.firstName,
     lastName: request.body.lastName,
@@ -110,6 +116,9 @@ const deleteImage = (imageName) => {
 
 // Upload profile picture
 exports.uploadProfilePhoto = (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "GET, POST");
+
   const BusBoy = require("busboy");
   const path = require("path");
   const os = require("os");
@@ -162,6 +171,9 @@ exports.uploadProfilePhoto = (request, response) => {
 
 // GET - User Detail
 exports.getUserDetail = (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "GET, POST");
+
   let userData = {};
   db.doc(`/users/${request.user.username}`)
     .get()
@@ -180,6 +192,9 @@ exports.getUserDetail = (request, response) => {
 
 // POST - Update User Details
 exports.updateUserDetails = (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "GET, POST");
+
   let document = db.collection("users").doc(`${request.user.username}`);
   document
     .update(request.body)

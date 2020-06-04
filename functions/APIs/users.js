@@ -3,6 +3,8 @@ const config = require("../util/config");
 
 const firebase = require("firebase");
 
+const cors = require("cors");
+
 firebase.initializeApp(config);
 
 const { validateLoginData, validateSignUpData } = require("../util/validators");
@@ -24,7 +26,9 @@ exports.logInUser = (request, response) => {
       return data.user.getIdToken();
     })
     .then((token) => {
-      return response.json({ token });
+      return cors()(request, response, () => {
+        response.json({ token });
+      });
     })
     .catch((error) => {
       console.error(error);
@@ -80,7 +84,9 @@ exports.signUpUser = (request, response) => {
       return db.doc(`/users/${newUser.username}`).set(userCredentials);
     })
     .then(() => {
-      return response.json({ token });
+      return cors()(request, response, () => {
+        response.json({ token });
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -94,7 +100,7 @@ exports.signUpUser = (request, response) => {
     });
 };
 
-deleteImage = (imageName) => {
+const deleteImage = (imageName) => {
   const bucket = admin.storage().bucket();
   const path = `${imageName}`;
   return bucket
@@ -129,6 +135,7 @@ exports.uploadProfilePhoto = (request, response) => {
     imageToBeUploaded = { filePath, mimetype };
     file.pipe(fs.createWriteStream(filePath));
   });
+
   deleteImage(imageFileName);
   busboy.on("finish", () => {
     admin
@@ -167,7 +174,9 @@ exports.getUserDetail = (request, response) => {
     .then((doc) => {
       if (doc.exists) {
         userData.userCredentials = doc.data();
-        return response.json(userData);
+        return cors()(request, response, () => {
+          response.json(userData);
+        });
       }
     })
     .catch((error) => {
@@ -186,8 +195,10 @@ exports.updateUserDetails = (request, response) => {
     })
     .catch((error) => {
       console.error(error);
-      return response.status(500).json({
-        message: "Cannot upate the value",
+      return cors()(request, response, () => {
+        response.status(500).json({
+          message: "Cannot upate the value",
+        });
       });
     });
 };

@@ -3,7 +3,7 @@ const config = require("../util/config");
 
 const firebase = require("firebase");
 
-const cors = require("cors");
+const cors = require("cors")({ origin: true });
 
 firebase.initializeApp(config);
 

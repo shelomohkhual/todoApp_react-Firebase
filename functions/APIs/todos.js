@@ -1,6 +1,6 @@
 const { db } = require("../util/admin");
 
-const cors = require("cors");
+const cors = require("cors")({ origin: true });
 
 // GET – fetch all todos
 exports.getAllTodos = (request, response) => {

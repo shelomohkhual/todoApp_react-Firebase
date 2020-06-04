@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "cors": "^2.8.5",
     "dayjs": "^1.8.28",
     "firebase-functions": "^3.6.2",
     "react": "^16.13.1",

@@ -1,7 +1,5 @@
 const { db } = require("../util/admin");
 
-const cors = require("cors")({ origin: true });
-
 // GET – fetch all todos
 exports.getAllTodos = (request, response) => {
   db.collection("todos")
@@ -18,9 +16,8 @@ exports.getAllTodos = (request, response) => {
           createdAt: doc.data().createdAt,
         });
       });
-      return cors()(request, response, () => {
-        response.json(todos);
-      });
+
+      response.json(todos);
     })
     .catch((err) => {
       console.error(err);
@@ -56,9 +53,7 @@ exports.postOneTodo = (request, response) => {
       const responseTodo = newTodo;
       responseTodo.id = doc.id;
 
-      return cors()(request, response, () => {
-        response.json(responseTodo);
-      });
+      response.json(responseTodo);
     })
     .catch((error) => {
       response.status(500).json({
@@ -89,10 +84,8 @@ exports.deleteTodo = (request, response) => {
       return document.delete();
     })
     .then(() => {
-      return cors()(request, response, () => {
-        response.json({
-          message: "Delete successful",
-        });
+      response.json({
+        message: "Delete successful",
       });
     })
     .catch((error) => {
@@ -117,10 +110,8 @@ exports.editTodo = (request, response) => {
   document
     .update(request.body)
     .then(() => {
-      return cors()(request, response, () => {
-        response.json({
-          message: "Update successfully",
-        });
+      response.json({
+        message: "Update successfully",
       });
     })
     .catch((error) => {

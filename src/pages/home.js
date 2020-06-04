@@ -99,10 +99,6 @@ class home extends Component {
     axios
       .get("/user")
       .then((response) => {
-        console.log("user respone: " + response);
-        console.log("user respone: " + response);
-        console.log("user respone: " + response);
-        console.log("user respone: " + response);
         console.log(response.data);
         this.setState({
           firstName: response.data.userCredentials.firstName,

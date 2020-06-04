@@ -2,9 +2,6 @@ const { db } = require("../util/admin");
 
 // GET – fetch all todos
 exports.getAllTodos = (request, response) => {
-  response.set("Access-Control-Allow-Origin", "*");
-  response.set("Access-Control-Allow-Methods", "GET, POST");
-
   db.collection("todos")
     .where("username", "==", request.user.username)
     .orderBy("createdAt", "desc")
@@ -30,9 +27,6 @@ exports.getAllTodos = (request, response) => {
 
 // POST – create todo
 exports.postOneTodo = (request, response) => {
-  response.set("Access-Control-Allow-Origin", "*");
-  response.set("Access-Control-Allow-Methods", "GET, POST");
-
   // Validation for Empty Title And Body
   if (request.body.title.trim() === "") {
     return response.status(400).json({
@@ -72,9 +66,6 @@ exports.postOneTodo = (request, response) => {
 
 // DELETE – delete todo
 exports.deleteTodo = (request, response) => {
-  response.set("Access-Control-Allow-Origin", "*");
-  response.set("Access-Control-Allow-Methods", "GET, POST");
-
   const document = db.doc(`/todos/${request.params.todoId}`);
 
   document
@@ -107,9 +98,6 @@ exports.deleteTodo = (request, response) => {
 
 // PUT – Edit todo
 exports.editTodo = (request, response) => {
-  response.set("Access-Control-Allow-Origin", "*");
-  response.set("Access-Control-Allow-Methods", "GET, POST");
-
   // validation : restrict editing "ID" and "CreatedAt"
   if (request.body.todoId || request.body.createdAt) {
     return response.status(403).json({

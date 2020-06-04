@@ -92,12 +92,18 @@ class login extends Component {
         this.props.history.push("/");
       })
       .catch((error) => {
-        this.setState({
-          errors: error.response.data,
-          loading: false,
-        });
-      })
-      .then(function () {});
+        if (error.response !== undefined) {
+          this.setState({
+            errors: error.response.data,
+            loading: false,
+          });
+        } else {
+          this.setState({
+            errors: { Error: "something wrong" },
+            loading: false,
+          });
+        }
+      });
   };
 
   render() {

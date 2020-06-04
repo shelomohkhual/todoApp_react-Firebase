@@ -81,8 +81,8 @@ class login extends Component {
       .then((response) => {
         console.log("login response: " + response);
         console.log("login response: " + response);
-        console.log("login response: " + response);
-        console.log("login response: " + response);
+        console.log("login response data: " + response.data);
+        console.log("login response data: " + response.data);
         localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
         this.setState({
           loading: false,

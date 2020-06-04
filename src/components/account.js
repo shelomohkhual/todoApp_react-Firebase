@@ -16,7 +16,7 @@ import {
 
 import clsx from "clsx";
 
-import axios from "axios";
+import axios from "../util/api";
 import { authMiddleWare } from "../util/auth";
 
 const styles = (theme) => ({

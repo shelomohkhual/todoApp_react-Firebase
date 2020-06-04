@@ -19,7 +19,7 @@ import CardContent from "@material-ui/core/CardContent";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 
-import axios from "axios";
+import axios from "../util/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { authMiddleWare } from "../util/auth";
@@ -91,6 +91,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const apiUrl = "https://us-central1-todoapp-95974.cloudfunctions.net/api";
+
 class todo extends Component {
   constructor(props) {
     super(props);
@@ -123,7 +125,7 @@ class todo extends Component {
     const authToken = localStorage.getItem("AuthToken");
     axios.defaults.headers.common = { Authorization: `${authToken}` };
     axios
-      .get("/todos")
+      .get(`${apiUrl}/todos`)
       .then((response) => {
         this.setState({
           todos: response.data,

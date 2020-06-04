@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../util/api";
 
 import Account from "../components/account";
 import Todo from "../components/todo";

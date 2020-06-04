@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import axios from "axios";
+import axios from "../util/api";
 
 const styles = (theme) => ({
   paper: {

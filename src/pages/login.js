@@ -12,7 +12,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import axios from "axios";
+import axios from "../util/api";
 
 const styles = (theme) => ({
   paper: {
@@ -83,6 +83,7 @@ class login extends Component {
         console.log("login response: " + response);
         console.log("login response data: " + response.data);
         console.log("login response data: " + response.data);
+
         localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
         localStorage.setItem("login json", `${response.data.token}`);
         this.setState({
